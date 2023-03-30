@@ -1,0 +1,66 @@
+{% extends "user/base.html" %}
+{% block title %} Register {% endblock %}
+{% block body %}
+    {% if message %}
+    {{ message}}
+    {% endif %}
+    {% comment %} <form action="{% url 'register' %}"method="POST">
+        {% csrf_token %}
+        <div>
+            <input type="text" autofocus name="username" placeholder="Username">
+        </div>
+        <div>
+            <input type="email" name="email" placeholder="Email">
+        </div>
+        <div>
+            <input type="password" name="password" placeholder="Password">
+        </div>
+        <div>
+            <input type="password" name="confirmation" placeholder="Confirm Password">
+        </div>
+        <div>
+            <input type="submit" value="Register">
+        </div>
+    </form> {% endcomment %}
+    <div class="register-container">
+    <form method="POST" class="register-form">
+        {% csrf_token %}
+        {{ form.ValidationError}}
+        <label>{{ form.username.label }}</label>
+        {{ form.username }}
+        <br>
+        {{ form.errors.email}}
+        <label>{{ form.email.label }}</label>
+        
+        {{ form.email }}
+        <br>
+        {{ form.errors.password}}
+        {{ form.errors.password2}}
+        <label>{{ form.password1.label }}</label>
+        {{ form.password1 }}
+        <br>
+        <label>{{ form.password2.label }}</label>
+        {{ form.password2 }} 
+        {% comment %} {{form.as_p}} {% endcomment %}
+        <br>
+        <input class="btn btn-primary" id="login-button" type="submit" value="Register">
+        <br>
+        <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+    </form>
+</div>
+<script>
+
+    let username = document.querySelector("#id_username")
+    let email = document.querySelector("#id_email")
+    let password1 = document.querySelector("#id_password1")
+    let password2 = document.querySelector("#id_password2")
+
+    let label = document.querySelector("label")
+    username.setAttribute("class","form-control")
+    email.setAttribute("class","form-control")
+    password1.setAttribute("class","form-control")
+    password2.setAttribute("class","form-control")
+    label.setAttribute("class","form-label")
+    username.setAttribute("placeholder", "Enter your Username here");
+</script>
+{% endblock %}

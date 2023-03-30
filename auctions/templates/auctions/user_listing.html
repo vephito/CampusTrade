@@ -1,0 +1,27 @@
+{% extends 'auctions/base.html'%}
+{% block body %}
+
+
+<h1 class="mb-4">Your Listing</h1>
+<div class="row ">
+    {% for list in listings %}
+    <div class="col-md-7 mb-4">
+      <div class="card">
+        <a href="{% url 'listing_detail' list.id %}">
+          <img class="card-img-top" src="{{list.image.url}}" alt="{{list.title}}">
+        </a>
+        <div class="card-body">
+          <h5 class="card-title">{{list.title}}</h5>
+          <p class="card-text card-text-list">{{list.description}}</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <small class="text-muted">{{list.user}}</small>
+            <h6 class="text-muted">${{list.price}}</h6>
+          </div>
+       
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+  </div>
+{% endblock %}

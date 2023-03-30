@@ -1,0 +1,19 @@
+{% extends 'auctions/base.html'%}
+{% block body %}
+<div class="user-container">
+<div class="user-info">
+    <spam class="id_username fs-1">{{profile.username|title}}</spam>
+    <br>
+    {{ profile.email}}
+    <br>
+    <a  href="{% url "logout" %}"><button class="mt-2 signout-btn">Sign Out</button></a>
+<div>
+</div>
+<script>
+    let username= document.querySelector("#id_username");
+    let email = document.querySelector("#id_email");
+    username.setAttribute("class","username-profile fs-5")
+    email.setAttribute("class","email-profile")
+    <script>
+
+{% endblock %}

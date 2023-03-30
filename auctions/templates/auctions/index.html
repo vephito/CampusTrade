@@ -1,0 +1,15 @@
+{% extends 'auctions/base.html' %} 
+{% block title%}Index{%endblock%}
+{% block body %}
+    {% if user.is_authenticated %}
+    <h1>Hi {{ request.user.username}} this is the Index Page</h1>
+    <a href="{% url 'create' %}">Create Listing</a>
+    <a href="{% url 'logout' %}">Log-Out</a>
+    {% else %}
+    <h1>Hi there! This is the Index Page</h1>
+    <a href="{% url 'login' %}">Log-In</a>
+    <h3>Don't have an Account?</h3>
+    <a href="{% url 'register' %}">Register</a>
+    {% endif %}
+   
+{% endblock %}

@@ -1,0 +1,48 @@
+
+.container{
+ margin-top: 150px;
+}
+
+.login-container{
+    margin: auto;
+    max-width: 550px;
+    background-color: #fff;
+    -webkit-box-shadow: 2px 2px 13px -4px rgba(0, 0, 0, 0.21);
+    box-shadow: 2px 2px 13px -4px rgba(0, 0, 0, 0.21); 
+}
+.login-form {
+    display: flex;
+    flex-direction: column;
+    padding:30px;
+}
+#login-button{
+    width: 50%;
+    align-self: center ;
+}
+.register-container{
+    margin: auto;
+    max-width: 550px;
+    background-color: #fff;
+    -webkit-box-shadow: 2px 2px 13px -4px rgba(0, 0, 0, 0.21);
+    box-shadow: 2px 2px 13px -4px rgba(0, 0, 0, 0.21); 
+}
+.register-form{
+    display: flex;
+    flex-direction: column;
+    padding:30px;
+}
+.logo-name{
+    font-family: "Futura", sans-serif;
+    color:black;
+    font-size: 24px;
+}
+.nav-link{
+    color: gray !important;
+}
+.nav-link:hover{
+    color: black !important;
+}
+.active{
+    color:black !important;  
+    text-decoration: underline !important;
+}

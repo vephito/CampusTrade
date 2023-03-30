@@ -1,0 +1,34 @@
+{% extends 'user/base.html' %}
+
+{% block title %}Login{% endblock %}
+{% block body %}
+<div class="login-container">
+    <form method="POST" class="login-form " action="">
+    {% csrf_token %}
+    {% for message in messages  %}
+    {{ message }}
+    {% endfor %}
+   
+    {% for field in form %}
+    <div class="form-outline mb-4">
+      {{ field.label_tag }}
+	        	{{ field }} 
+    </div>
+		{% endfor %}    
+    {% comment %} {{ form.as_p}} {% endcomment %}
+    <button type="submit" class="btn btn-primary btn-block mb-4 " id="login-button">SIGN IN</button>
+    <br>
+    <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+    </from>
+  </div>
+<script>
+  let username = document.querySelector("#id_username")
+  let password = document.querySelector("#id_password")
+  let label = document.querySelector("label")
+  username.setAttribute("class","form-control")
+  password.setAttribute("class","form-control")
+  label.setAttribute("class","form-label")
+
+
+</script>
+{% endblock %}

@@ -1,0 +1,8 @@
+<form method="post" action="{% url 'comment' pk=listings.pk  %}">
+    {% csrf_token %}
+    <div class="comment-text">
+    {{ form2.text}}
+    </div>
+    <button class="btn btn-primary" type="submit">Comment</button>
+</form>
+  

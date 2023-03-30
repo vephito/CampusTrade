@@ -1,0 +1,13 @@
+{% extends 'auctions/base.html' %}
+{% block title %}
+    Confirm Delete Listing
+{% endblock %}
+{% block body %}
+<a href="{% url 'listing_detail' listings.id%}">Go back</a>
+<form method="POST">
+    {% csrf_token %}
+    <p>Are your sure you want to delete this task? <b>"{{listings.title}}"</b> </p>
+    <input class="button" type="submit" value="Delete" />
+</form>
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'auctions/base.html' %}
+{% block title %}Listing{% endblock %}
+{% block body %}
+    <div class="row ">
+        {% for list in listings %}
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <a href="{% url 'listing_detail' list.id %}">
+              <img class="card-img-top" src="{{list.image.url}}" alt="{{list.title}}">
+            </a>
+            <div class="card-body">
+              <h5 class="card-title">{{list.title}}</h5>
+              <p class="card-text card-text-list">{{list.description}}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted">{{list.user}}</small>
+                {% if list.bid_listing.all %}
+                <h6 class="text-muted">${{list.bid_listing.last.bid_amount}}</h6>
+                {% else %}
+                <h6 class="text-muted">${{list.price}}</h6>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+     
+      <div class="pagi-container">
+        <div class="row my-5">
+            <div class="col-md-4 offset-md-3">
+                <nav aria-label="...">
+                    <ul class="pagination">
+                      <li class="page-item ">
+                        {% if page_obj.has_previous %}
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Previous</a>
+                        {% endif %}
+                      </li>
+                      {% for num_page in page_obj.paginator.page_range %}
+                      {% if page_obj.number == num_page %}
+                      <li class="page-item active">
+                        <a class="page-link" href="?page={{ num_page }}">{{num_page}}<span class="sr-only"></span></a>
+                      </li>
+                      {% else %}
+                      <li class="page-item ">
+                        <a class="page-link" href="?page={{ num_page }}">{{num_page}}<span class="sr-only"></span></a>
+                      </li>
+                      {% endif %}
+                      {% endfor %}
+                    
+                        {% if page_obj.has_next %}
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                        {% endif %}
+                      </li>
+                    </ul>
+                  </nav>
+            </div>
+        </div>
+      </div>
+{% endblock %}

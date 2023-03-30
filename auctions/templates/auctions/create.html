@@ -1,0 +1,62 @@
+{% extends 'auctions/base.html' %}
+{% block title %}
+Create Listing
+{%endblock%}
+{% block body %}
+
+  
+  <div class="create-container">
+    <h1>Create Listing</h1>
+  <form method="POST" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+    
+      {{ form.title }}
+    </div>
+    
+    <div class="form-group">
+      
+      <br>
+      {{ form.price }}
+    </div>
+    <div class="form-group">
+      
+    {{ form.description }}
+    </div>
+    <div class="form-group">
+        
+        <p class="form-control " type="file" id="formFile">{{ form.image }}</p>
+      </div>
+    <div class="form-group">
+     
+      <select class="form-select  mb-4" aria-label="Default select example">
+        <option selected>Select Category</option>
+        {% for i in form.category%}
+        {% if forloop.counter == 1 %}
+        {% else %}
+        <option value="{{i}}">
+            {% endif %}
+        {% endfor %}
+        </select> 
+      
+    </div>
+    <button type="submit" class="btn btn-primary " id="create-button">Create</button>
+
+
+  </form>
+</div>
+  <script>
+    var input = document.getElementById("id_description");
+    var title = document.getElementById("id_title");
+    var price = document.getElementById("id_price");
+    var des = document.getElementById("id_description");
+    title.setAttribute("class","form-control   mt-4")
+    title.setAttribute("placeholder","Enter Title here")
+    price.setAttribute("class","form-control  mb-4")
+    price.setAttribute("placeholder","Enter Starting Bid")
+    price.setAttribute("value","")
+    input.setAttribute("placeholder", "Enter Description here");
+    des.setAttribute("class", "form-control  mb-4")
+    
+</script>
+{% endblock %}

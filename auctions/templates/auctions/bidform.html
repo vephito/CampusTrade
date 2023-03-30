@@ -1,0 +1,9 @@
+<form method="post" action="{% url 'bid_update' pk=listings.pk  %}">
+    {% csrf_token %}
+    {{ form1.as_p }}
+    
+    
+    <button class="btn btn-primary" type="submit">Bid</button>
+</form>
+
+  
