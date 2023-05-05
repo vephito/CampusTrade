@@ -1,0 +1,35 @@
+{% extends 'auctions/base.html' %}
+
+{% comment %} {% block body %}
+
+  <h1>My Wins</h1>
+  
+  {% for win in user_wins %}
+  <div class="mt-4">
+        {{win.win_item.title}}
+  </div>
+        {% empty %}
+    <p>You have not won anything yet</p>
+  {% endfor %}
+  
+{% endblock %} {% endcomment %}
+
+
+
+
+{% block body %}
+<div class="container mt-5 w-50">
+  <h1 class="text-center">My Wins</h1>
+  
+  {% for win in user_wins %}
+  <div class="card mt-4">
+    <div class="card-body">
+      <h5 class="card-title">{{ win.win_item.title }}</h5>
+
+    </div>
+  </div>
+  {% empty %}
+    <p class="text-center mt-5">You have not won anything yet</p>
+  {% endfor %}
+</div>
+{% endblock %}

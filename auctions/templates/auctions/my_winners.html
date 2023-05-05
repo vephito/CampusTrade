@@ -1,0 +1,47 @@
+{% extends 'auctions/base.html' %}
+{% comment %} 
+{% block body %}
+
+  <h1>My Winners</h1>
+  {% for listing in listings %}
+    <h2>{{ listing.title }}</h2>
+  
+    <ul>
+      {% for winner in listing.get_winners %}
+        <li>{{ winner.winner }} won the bid</li>
+       <a href="mailto:{{ winner.winner.email }}">{{ winner.winner.email }}</a>
+      {% empty %}
+        <li>No winners yet</li>
+      {% endfor %}
+    </ul>
+  {% empty %}
+    <p>No listings found</p>
+  {% endfor %}
+{% endblock %} {% endcomment %}
+
+
+
+{% block body %}
+  <div class="container mt-5 w-50">
+    <h1 class="text-center mb-5">My Listing Winners</h1>
+    {% for listing in listings %}
+      <div class="card mb-3">
+        <div class="card-header">
+          <h2>{{ listing.title }}</h2>
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            {% for winner in listing.get_winners %}
+              <li class="list-group-item">{{ winner.winner }} won the bid <a href="mailto:{{ winner.winner.email }}">{{ winner.winner.email }}</a></li>
+            {% empty %}
+              <li class="list-group-item ">No winners yet</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    {% empty %}
+      <p class="text-center mt-5">No listings found</p>
+    {% endfor %}
+  </div>
+{% endblock %}
+

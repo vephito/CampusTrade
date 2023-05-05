@@ -1,0 +1,42 @@
+{% extends 'base/base.html' %}
+{% block body %}
+       
+
+
+
+          <div class="container">
+            {% if bids %}
+              <h1>Bids</h1>
+              <a href="{% url "bidlisting" %}">go back</a>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Amount</th>
+                    <th>Bidder</th>
+                    <th>Created</th>
+                    <th>Updated</th>
+                    
+                    <th>Edit</th>
+                    <th>Delete</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for bid in bids %}
+                    <tr>
+                      <td>₹{{ bid.bid_amount }}</td>
+                      <td>{{ bid.bidder }}</td>
+                      <td>{{ bid.bid_date }}</td>
+                      <td>{{ bid.updated_at }}</td>
+                       <td><a class="btn btn-warning" href="{% url 'bidedit' listing_pk=listing.id pk=bid.id %}">Edit</a></td>
+                        <td><a class="btn btn-danger" href="{% url 'deletebid' listing_pk=listing.id pk=bid.id %}">Delete</a></td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            {% else %}
+              <p>No Bid yet.</p>
+            {% endif %}
+          </div>
+          
+       {% endblock %}

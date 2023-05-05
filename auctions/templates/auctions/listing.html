@@ -1,9 +1,30 @@
 {% extends 'auctions/base.html' %}
 {% block title %}Listing{% endblock %}
 {% block body %}
+<div id="filter" class="mb-4" style="display: flex; justify-content: center; align-items: center; margin-bottom: 20px;">
+    <form method="GET" style="margin-right: 20px;">
+      <input type="text" value="{{search_input}}" placeholder="Search all listings..." name="search-area" style="padding: 8px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; margin-right: 10px; width: 200px;">
+      
+      <button  type="submit"  value="Search" style="background-color: #4CAF50; color: white; padding: 8px 16px; font-size: 16px; border: none; border-radius: 5px; cursor: pointer;">
+        Search
+      </button>
+    </form>
+    
+    <form method="GET">
+      <select id="category" name="category" style="padding: 8px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; margin-right: 10px; width: 200px;">
+          <option value="" >All Categories</option>
+          {% for category in categories %}
+          <option  value="{{ category.id }}">{{ category.title }}</option>
+          {% endfor %}
+      </select>
+      <button type="submit" style="background-color: #4CAF50; color: white; padding: 8px 16px; font-size: 16px; border: none; border-radius: 5px; cursor: pointer;">Filter</button>
+  </form>
+  </div>
+  
     <div class="row ">
+      {% if listings %}
         {% for list in listings %}
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-5">
           <div class="card">
             <a href="{% url 'listing_detail' list.id %}">
               <img class="card-img-top" src="{{list.image.url}}" alt="{{list.title}}">
@@ -14,15 +35,19 @@
               <div class="d-flex justify-content-between align-items-center">
                 <small class="text-muted">{{list.user}}</small>
                 {% if list.bid_listing.all %}
-                <h6 class="text-muted">${{list.bid_listing.last.bid_amount}}</h6>
+                <h6 class="text-muted">₹{{list.bid_listing.last.bid_amount}}</h6>
+                {{ highest_bid }}
                 {% else %}
-                <h6 class="text-muted">${{list.price}}</h6>
+                <h6 class="text-muted">₹{{list.price}}</h6>
                 {% endif %}
               </div>
             </div>
           </div>
         </div>
         {% endfor %}
+        {% else %}
+        <h3>No Listing Found</h3>
+        {% endif %}
       </div>
      
       <div class="pagi-container">

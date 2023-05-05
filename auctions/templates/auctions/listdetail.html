@@ -1,84 +1,105 @@
-{% extends 'auctions/base.html' %}
-{% block title %} {{listings.title }} 
-{% endblock %}
-{% block body %}
-    {% comment %} {% for list in listings %}
-    {{ list }}
-    {% endfor %}  {% endcomment %}
-   
-  
+{% extends 'auctions/base.html' %} {% block title %} {{listings.title }}
+{%endblock %} {% block body %} {% comment %} {% for list in listings %} {{ list
+}} {% endfor %} {% endcomment %}
+
 <div class="row">
-    <div class="col-md-6">
-        <img src="{{ listings.image.url }}" class=" img-detail image-cover " alt="{{ listings.title }}">
-        <br>
-        <br>
-        <a href="{% url 'create_watchlist' listing_id=listings.id %}" class="btn btn-warning mb-4">Add to Watchlist</a>
-    </div>
-    <div class="col-md-6">
-        <h1 class="mt-5">{{ listings.title }}</h1>
-        {% if listings.bid_listing.all %}
-        <div class="d-flex align-items-center">
-        <p>Current bid: </p>
-        <p class="text-success fs-2"> ₹{{ listings.bid_listing.last.bid_amount }}</p>
-        </div>
-        <h6 class=" mb-4">Starting bid:₹{{ listings.price }}</h6>
-        
-        {% else %}
-        <h6 class=" mb-4">Starting bid:₹{{ listings.price }}</h6>
-        {% endif %}
-     
-        <!-- DESCRIPTION CARD -->
-        <div class="card card-des mb-4" >
-            <div class="card-body">
-                <h6 class="card-subtitle mb-2 text-muted">Description</h6>
-                <p class="card-text">{{ listings.description }}</p>
-            </div>
-       </div>
-
-       <!-- DESCRIPTION CARD -->
-        {% if listings.bid_listing.all %}
-            <p class="text-success">Current bid: ₹{{ listings.bid_listing.last.bid_amount }}</p>
-        {% else %}
-            <p class="text-muted">No bids yet</p>
-        {% endif %}
-        {% if request.user == listings.user %}
-            <a href="{% url 'winner' listing_id=listings.id %}" class="btn btn-primary">Close Bid</a>
-            <a href="{% url 'delete' listings.id %}" class="btn btn-danger">Delete</a>
-        {% else %}
-            {% if user.is_authenticated %}
-           
-                {% include 'auctions/bidform.html' %}      
-           
-            </div>
-        </div>
-                {% include 'auctions/commentform.html' %}
-            {% else %}
-                <p><a href="{% url 'login' %}">Log in</a> to place a bid or add to watchlist.</p>
-            {% endif %}
-        {% endif %}
+  <div class="col-md-6">
+    <img
+      src="{{ listings.image.url }}"
+      class="img-detail image-cover"
+      alt="{{ listings.title }}"
+    />
+    <br />
+    <br />
+    <!-- Check if Items is SOLD -->
+    {% if listings.sold %}
+    <h1>
+    {{winner.winner}} has won the auction  with a bid of ₹{{highest}}</h1>
     
-<div class="row mt-5">
-    <div class="col-md-8">
-        <h3 class="mb-4">Comments:</h3>
-        {% for comment in listings.comment.all %}
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">{{ comment.user.username }}</h5>
-                    <p class="card-text">{{ comment.text }}</p>
-                    <p class="card-text"><small class="text-muted">{{ comment.created_at }}</small></p>
-                </div>
-            </div>
-        {% empty %}
-            <p class="text-muted">No comments yet</p>
-        {% endfor %}
+    {%else %}
+    {% if request.user.is_authenticated %}
+    <a
+      href="{% url 'create_watchlist' listing_id=listings.id %}"
+      class="btn btn-warning mb-4"
+      >Add to Watchlist</a
+    >
+    {% else %} {% endif %}
+  </div>
+  <div class="col-md-6">
+    <h1>{{ listings.title }}</h1>
+    {% if listings.bid_listing.all %}
+    <div class="d-flex align-items-center">
+      <p>Current bid:</p>
+      <p class="text-success fs-2">
+        ₹{{ listings.bid_listing.last.bid_amount }}
+      </p>
     </div>
-</div>
-<script>
-    let bid = document.querySelector("#id_bid_amount")
-   
-    bid.setAttribute("class","form-control")
-    bid.setAttribute("placeholder","Enter You Bids Here")
-    bid.setAttribute("value","")
+    <h6 class="mb-4">Starting bid:₹{{ listings.price }}</h6>
 
+    {% else %}
+    <h6 class="mb-4">Starting bid:₹{{ listings.price }}</h6>
+    {% endif %}
+
+    <!-- DESCRIPTION CARD -->
+    <div class="card card-des mb-4">
+      <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+        <p class="card-text">{{ listings.description }}</p>
+      </div>
+    </div>
+
+    <!-- DESCRIPTION CARD -->
+    
+    {% if listings.bid_listing.all %}
+    <p class="text-success">
+      Current bid: ₹{{ listings.bid_listing.last.bid_amount }}
+    </p>
+    {% else %}
+    <p class="text-muted">No bids yet</p>
+    {% endif %} {% if request.user == listings.user %}
+    <a href="{% url 'winner' listing_id=listings.id %}" class="btn btn-primary"
+      >Close Bid</a
+    >
+    <a href="{% url 'delete' listings.id %}" class="btn btn-danger">Delete</a>
+    
+    {% else %} 
+    {% if user.is_authenticated %}
+    {% include 'auctions/bidform.html' %}
+  </div>
+
+  {% include 'auctions/commentform.html' %} {% else %}
+  <p>
+    <a href="{% url 'login' %}">Log in</a> to place a bid or add to watchlist.
+  </p>
+  {% endif %} {% endif %}
+</div>
+<div class="row mt-5">
+  <div class="col-md-8">
+    <h3 class="mb-4">Comments:</h3>
+    {% for comment in listings.comment.all %}
+    <div class="card mb-2 card-des">
+      <div class="card-body">
+        <p class="card-text">{{ comment.text }}</p>
+        <p class="card-text">
+          <small class="text-muted"
+            >{{ comment.user.username|title }}
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; {{ comment.create_at }}</small
+          >
+        </p>
+      </div>
+    </div>
+    {% empty %}
+    <p class="text-muted">No comments yet</p>
+    {% endfor %}
+  </div>
+</div>
+<!-- For Items Sold !!!TODO!!! -->
+{% endif %}
+<script>
+  let bid = document.querySelector("#id_bid_amount");
+
+  bid.setAttribute("class", "form-control");
+  bid.setAttribute("placeholder", "Enter You Bids Here");
+  bid.setAttribute("value", "");
 </script>
 {% endblock %}

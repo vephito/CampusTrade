@@ -1,0 +1,74 @@
+{% extends 'auctions/base.html' %}
+
+{% comment %} {% block body %}
+<h3>My bids Listing</h3>
+<br>
+<br>
+{% for listing in listings %}
+    <h2>{{ listing.title }}</h2>
+    {% for bid in user_bids %}
+    {% if bid.listing == listing  %}
+    <p>My bid: {{ bid.bid_amount }}</p>
+{% endif %}
+    {% endfor %}
+    <p>Current highest bid: {{ listing.get_highest_bid }}(
+        {% if listing.get_highest_bid_username == request.user.username %}
+     You are the highest bidder
+      {% else %}
+        {{listing.get_highest_bid_username}}
+{% endif %})</p>
+{% endfor %}
+{% endblock %} {% endcomment %}
+
+
+
+{% block body %}
+
+<div class="container mt-5 w-50">
+  <h1 class="mb-4 text-center">My Bids</h1>
+  {% for listing in listings %}
+  {% if listing.sold%}
+  <div class="card mb-4 text-muted">
+    <div class="card-body">
+      <h2 class="card-title ">{{ listing.title }}</h2>
+      {% for bid in user_bids %}
+        {% if bid.listing == listing %}
+        <p class="card-text mb-0 ">My Bid: ₹{{ bid.bid_amount }}<span class="text-danger h1 "> SOLD</span></p>
+        {% endif %}
+      {% endfor %}
+      <p class="card-text font-weight-normal">Current Highest Bid: ₹{{ listing.get_highest_bid }} (
+        {% if listing.get_highest_bid_username == request.user.username %}
+       <span class=" "> You are the highest bidder </span>
+        {% else %}
+       <span class="text-danger"> {{ listing.get_highest_bid_username }}</span>
+        {% endif %}
+        )</p>
+    </div>
+  </div>
+  {% else %}
+  <div class="card mb-4">
+    <div class="card-body">
+      <h2 class="card-title ">{{ listing.title }}</h2>
+      {% for bid in user_bids %}
+        {% if bid.listing == listing %}
+        <p class="card-text mb-0">My Bid: ₹{{ bid.bid_amount }}</p>
+        {% endif %}
+      {% endfor %}
+      <p class="card-text font-weight-normal">Current Highest Bid: ₹{{ listing.get_highest_bid }} (
+        {% if listing.get_highest_bid_username == request.user.username %}
+       <span class="text-success "> You are the highest bidder </span>
+        {% else %}
+       <span class="text-danger"> {{ listing.get_highest_bid_username }}</span>
+        {% endif %}
+        )</p>
+    </div>
+  </div>
+  {% endif %}
+  {% empty %}
+  <p class="text-center mt-5">No Bids Found</p>
+
+  {% endfor %}
+</div>
+
+
+{% endblock %}

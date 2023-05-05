@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import Max
+from django.utils import timezone
 
 
 class Category(models.Model):
@@ -26,6 +28,26 @@ class Listing(models.Model):
     date_created = models.DateTimeField(
         auto_now_add=True, null=True, blank=True)
 
+    def __str__(self):
+        return f"{self.user} created {self.title}"
+
+    def get_highest_bid(self):
+        highest_bid = self.bid_listing.aggregate(Max('bid_amount'))[
+            'bid_amount__max']
+        return highest_bid
+
+    def get_highest_bid_username(self):
+        highest_bid = Bid.objects.filter(
+            listing=self).order_by('-bid_amount').first()
+        if highest_bid:
+            return highest_bid.bidder.username
+        else:
+            return 'No bids yet'
+
+    def get_winners(self):
+        winners = Winner.objects.filter(win_item=self)
+        return winners
+
 
 class Bid(models.Model):
     bidder = models.ForeignKey(
@@ -34,6 +56,13 @@ class Bid(models.Model):
         Listing, on_delete=models.CASCADE, related_name="bid_listing")
     bid_amount = models.IntegerField(default=0)
     bid_date = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.bidder} bid {self.bid_amount} on {self.listing.title} "
+
+    class Meta:
+        ordering = ['bid_amount']
 
 
 class Comment(models.Model):
@@ -42,11 +71,24 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField()
     create_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.user} Comment {self.text}"
+
+    def save(self, *args, **kwargs):
+        self.updated_at = timezone.now()
+        super().save(*args, **kwargs)
 
 
 class Winner(models.Model):
-    winner = models.ForeignKey(User, on_delete=models.CASCADE)
-    win_item = models.ForeignKey(Listing, on_delete=models.CASCADE)
+    winner = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="win_user")
+    win_item = models.ForeignKey(
+        Listing, on_delete=models.CASCADE, related_name="won_item")
+
+    def __str__(self):
+        return f"{self.winner} won the bid item {self.win_item}"
 
 
 class Watchlist(models.Model):

@@ -1,0 +1,10 @@
+{% extends 'base/base.html' %}
+{% block body %}
+        
+        <a href="{% url 'bid_list' pk=bid.id  %}">Go back</a>
+        <form method="POST">
+            {% csrf_token %}
+            <p>Are your sure you want to delete this bid? <b></b> </p>
+            <input class="button" type="submit" value="Delete" />
+        </form>
+    {% endblock %}

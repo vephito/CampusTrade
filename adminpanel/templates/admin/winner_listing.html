@@ -1,0 +1,32 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Winners{% endblock %}
+
+{% block body %}
+  <div class="container">
+    <h1>Winners</h1>
+    <a href="{% url 'create_winner' %}" class="btn btn-primary mb-3">Create Winner</a>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Winner</th>
+          <th>Winning Item</th>
+         
+        </tr>
+      </thead>
+      <tbody>
+        {% for winner in winners %}
+          <tr>
+            <td>{{ winner.winner }}</td>
+            <td>{{ winner.win_item.title }}</td>
+           
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="3">No winners yet.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

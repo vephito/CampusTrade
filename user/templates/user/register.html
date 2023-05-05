@@ -43,6 +43,11 @@
         {{ form.password2 }} 
         {% comment %} {{form.as_p}} {% endcomment %}
         <br>
+        
+        
+        
+        {{form.PermissionForm}}
+        <p><label for="is_super">Superuser</label> <input type="checkbox" id="is_super" name="is_super"></p>
         <input class="btn btn-primary" id="login-button" type="submit" value="Register">
         <br>
         <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>

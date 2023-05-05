@@ -7,6 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>{%block title %}CampusTrade{%endblock%}</title>
     <link rel="stylesheet" href="{% static 'auctions/styles.css' %}" />
+    
+		<link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+		<link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> </head>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -20,13 +23,14 @@
     });
     
       </script>
+     
       
   </head>
   <body>
  
     <nav class="navbar navbar-expand-lg bg-body-tertiary px-4 shadow p-3 mb-5 bg-body-tertiary rounded">
      
-      <a class="navbar-brand " href="#">
+      <a class="navbar-brand " href="{% url "listing" %}">
         <span class="logo-name">CampusTrade</span>
         {% comment %} <img src="{% static 'auctions/images/logo3.png' %}" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> {% endcomment %}
   </a>
@@ -75,6 +79,126 @@
 <div class="container">
     {% block body %} {% endblock %}
 </div>
+{% comment %} <footer class="footer-10 mt-5">
+  <div class="container">
+    <div class="row mb-5 pb-3 col-lg-12 no-gutters">
+    
+    </div>
+    <div class="row col-lg-12">
+      <div class="col-md-7 ">
+        <div class="row ">
+          <div class="col-md-4 mb-md-0 mb-4">
+            <h2 class="footer-heading">About</h2>
+            <ul class="list-unstyled">
+              <li><a href="#" class="d-block">Out story</a></li>
+              <li><a href="#" class="d-block">Awards</a></li>
+              <li><a href="#" class="d-block">Our Team</a></li>
+              <li><a href="#" class="d-block">Career</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4 mb-md-0 mb-4">
+            <h2 class="footer-heading">Company</h2>
+            <ul class="list-unstyled">
+              <li><a href="#" class="d-block">Our services</a></li>
+              <li><a href="#" class="d-block">Clients</a></li>
+              <li><a href="#" class="d-block">Contact</a></li>
+              <li><a href="#" class="d-block">Press</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4 mb-md-0 mb-4">
+            <h2 class="footer-heading">Resources</h2>
+            <ul class="list-unstyled">
+              <li><a href="#" class="d-block">Blog</a></li>
+              <li><a href="#" class="d-block">Newsletter</a></li>
+              <li><a href="#" class="d-block">Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-md-0 mb-4">
+        <h2 class="footer-heading">Subscribe</h2>
+     
+        <ul class="list-unstyled">
+          <li><a href="#" class="d-block">Blog</a></li>
+          <li><a href="#" class="d-block">Newsletter</a></li>
+          <li><a href="#" class="d-block">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="row mt-5 pt-4 border-top">
+      <div class="col-md-6 col-lg-12 mb-md-0 mb-4">
+        <p class="copyright mb-0 text-center"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved. | Build and Design by <a href="https://vephito.github.io/vephito/">Vephito</a>
+      </div>
+     
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+  </body>
+</html> {% endcomment %}
+<footer class="footer-10 mt-5">
+  <div class="container ">
+    <div class="row mb-5 pb-3 col-lg-12 no-gutters">
+    
+    </div>
+    <div class="row col-lg-12 col-md-12  ">
+    
+        <div class=" row m-auto">
+          <div class="col-md-3 mb-md-0 mb-4 ">
+            <h2 class="footer-heading ">About</h2>
+            <ul class="list-unstyled">
+              <li><a href="#" class="d-block">Out story</a></li>
+              <li><a href="#" class="d-block">Awards</a></li>
+              <li><a href="#" class="d-block">Our Team</a></li>
+              <li><a href="#" class="d-block">Career</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 mb-md-0 mb-4">
+            <h2 class="footer-heading ">Company</h2>
+            <ul class="list-unstyled ">
+              <li><a href="#" class="d-block">Our services</a></li>
+              <li><a href="#" class="d-block">Clients</a></li>
+              <li><a href="#" class="d-block">Contact</a></li>
+              <li><a href="#" class="d-block">Press</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 mb-md-0 mb-4">
+            <h2 class="footer-heading ">Resources</h2>
+            <ul class="list-unstyled">
+              <li><a href="#" class="d-block">Blog</a></li>
+              <li><a href="#" class="d-block">Newsletter</a></li>
+              <li><a href="#" class="d-block">Privacy Policy</a></li>
+            </ul>
+         
+          </div>
+      <div class="col-md-3 mb-md-0 mb-4">
+        <h2 class="footer-heading ">Subscribe</h2>
+     
+        <ul class="list-unstyled">
+          <li><a href="#" class="d-block">Blog</a></li>
+          <li><a href="#" class="d-block">Newsletter</a></li>
+          <li><a href="#" class="d-block">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+</div>
+    <div class="row mt-5 pt-4 border-top">
+      <div class="col-md-6 col-lg-12 mb-md-0 mb-4">
+        <p class="copyright mb-0 text-center"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved. | Build and Design by <a href="https://vephito.github.io/vephito/">Vephito</a>
+      </div>
+     
+    </div>
+  </div>
+</footer>
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
   </body>
 </html>
+

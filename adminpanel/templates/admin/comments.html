@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %}
+{% block body %}
+       
+
+
+
+          <div class="container">
+            {% if comments %}
+              <h1>Comments</h1>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Comment</th>
+                    <th>User</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for comment in comments %}
+                    <tr>
+                      <td>{{ comment.text }}</td>
+                      <td>{{ comment.user }}</td>
+                      <td><a href="{% url 'commentedit' listing_pk=listing.id pk=comment.id %}">Edit</a></td>
+                      <td><a href="{% url 'deletecomment' listing_pk=listing.id pk=comment.id %}">Delete</a></td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            {% else %}
+              <p>No comments yet.</p>
+            {% endif %}
+          </div>
+          
+       {% endblock %}

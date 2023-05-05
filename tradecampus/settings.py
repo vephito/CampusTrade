@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'auctions',
     'user',
+    'adminpanel',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -115,6 +116,16 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
+# Eamil setting
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = 'campustradeofficial@gmail.com'
+EMAIL_HOST_PASSWORD = 'eulgcjtyymvkcxrt'
 
 
 # Static files (CSS, JavaScript, Images)

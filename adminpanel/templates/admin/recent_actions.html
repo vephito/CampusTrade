@@ -1,0 +1,20 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th class="px-4 py-2">Action time</th>
+        <th class="px-4 py-2">User</th>
+        <th class="px-4 py-2">Action</th>
+        <th class="px-4 py-2">Object</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for log_entry in log_entries %}
+      <tr>
+        <td class="border px-4 py-2">{{ log_entry.action_time }}</td>
+        <td class="border px-4 py-2">{{ log_entry.user }}</td>
+        <td class="border px-4 py-2">{{ log_entry.get_action_display }}</td>
+        <td class="border px-4 py-2">{{ log_entry.object_repr }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>

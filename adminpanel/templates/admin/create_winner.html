@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+
+{% block body %}
+    <h1>Create Winner</h1>
+    <a href="{%url "winner_listing" %}" >go back</a>
+    <form method="POST" class="mt-4">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="{{ form.winner.id_for_label }}">Winner:</label>
+            {{ form.winner }}
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="{{ form.win_item.id_for_label }}">Winning Item:</label>
+            {{ form.win_item }}
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+{% endblock %}

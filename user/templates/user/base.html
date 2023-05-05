@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>{%block title %}User{%endblock%}</title>
     <link rel="stylesheet" href="{% static 'user/styles.css' %}" />
+    <link rel="stylesheet" href="{% static './css/style.css' %}">
     
 
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -28,7 +29,7 @@
    
     <nav class="navbar navbar-expand-lg bg-body-tertiary px-4 shadow p-3 mb-5 bg-body-tertiary rounded">
      
-        <a class="navbar-brand " href="#">
+        <a class="navbar-brand " href="{% url "listing" %}">
           <span class="logo-name">CampusTrade</span>
           {% comment %} <img src="{% static 'auctions/images/logo3.png' %}" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> {% endcomment %}
     </a>
@@ -56,8 +57,66 @@
     <div class="container">
     {% block body %} {% endblock %}
     
-      
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+   
   </div>
+  <footer class="footer-10 mt-5">
+    <div class="container">
+      <div class="row mb-5 pb-3 no-gutters">
+       
+        
+        
+      </div>
+      <div class="row">
+        <div class="col-md-7">
+          <div class="row">
+            <div class="col-md-4 mb-md-0 mb-4">
+              <h2 class="footer-heading">About</h2>
+              <ul class="list-unstyled">
+                <li><a href="#" class="d-block">Out story</a></li>
+                <li><a href="#" class="d-block">Awards</a></li>
+                <li><a href="#" class="d-block">Our Team</a></li>
+                <li><a href="#" class="d-block">Career</a></li>
+              </ul>
+            </div>
+            <div class="col-md-4 mb-md-0 mb-4">
+              <h2 class="footer-heading">Company</h2>
+              <ul class="list-unstyled">
+                <li><a href="#" class="d-block">Our services</a></li>
+                <li><a href="#" class="d-block">Clients</a></li>
+                <li><a href="#" class="d-block">Contact</a></li>
+                <li><a href="#" class="d-block">Press</a></li>
+              </ul>
+            </div>
+            <div class="col-md-4 mb-md-0 mb-4">
+              <h2 class="footer-heading">Resources</h2>
+              <ul class="list-unstyled">
+                <li><a href="#" class="d-block">Blog</a></li>
+                <li><a href="#" class="d-block">Newsletter</a></li>
+                <li><a href="#" class="d-block">Privacy Policy</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5 mb-md-0 mb-4">
+          <h2 class="footer-heading">Subscribe</h2>
+       
+          <ul class="list-unstyled">
+            <li><a href="#" class="d-block">Blog</a></li>
+            <li><a href="#" class="d-block">Newsletter</a></li>
+            <li><a href="#" class="d-block">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="row mt-5 pt-4 border-top">
+        <div class="col-md-6 col-lg-8 mb-md-0 mb-4">
+          <p class="copyright mb-0"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved. | Build and Design by <a href="https://vephito.github.io/vephito/">Vephito</a>
+        </div>
+       
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
   </body>
 </html>

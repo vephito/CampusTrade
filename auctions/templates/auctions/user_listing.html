@@ -15,7 +15,13 @@
           <p class="card-text card-text-list">{{list.description}}</p>
           <div class="d-flex justify-content-between align-items-center">
             <small class="text-muted">{{list.user}}</small>
-            <h6 class="text-muted">${{list.price}}</h6>
+            
+            
+            {% if list.bid_listing.all %}
+            <h6 class="text-muted">₹{{list.bid_listing.last.bid_amount}}</h6>
+            {% else %}
+            <h6 class="text-muted">₹{{list.price}}</h6>
+            {% endif %}
           </div>
        
         </div>

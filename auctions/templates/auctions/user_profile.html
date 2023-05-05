@@ -1,19 +1,46 @@
 {% extends 'auctions/base.html'%}
-{% block body %}
+{% comment %} {% block body %}
 <div class="user-container">
 <div class="user-info">
     <spam class="id_username fs-1">{{profile.username|title}}</spam>
     <br>
     {{ profile.email}}
     <br>
-    <a  href="{% url "logout" %}"><button class="mt-2 signout-btn">Sign Out</button></a>
+    <a href="{% url 'mywinners' %}"><button class=" mt-3 btn btn-success">View winners</button></a>
+    <br>
+    <a href="{% url 'my_bids' %}"><button class="btn mt-3 btn-success">My bids</button></a>
+    <br>
+    <a href="{% url 'my_wins' %}"><button class="btn mt-3 btn-success">My Wins</button></a>
+    <br>
+    <a  href="{% url "logout" %}"><button class="mt-3 signout-btn">Sign Out</button></a>
 <div>
 </div>
-<script>
-    let username= document.querySelector("#id_username");
-    let email = document.querySelector("#id_email");
-    username.setAttribute("class","username-profile fs-5")
-    email.setAttribute("class","email-profile")
-    <script>
 
+
+{% endblock %} {% endcomment %}
+
+
+{% block body %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">{{ profile.username|title }}</div>
+
+        <div class="card-body">
+          <p class="card-text">{{ profile.email }}</p>
+
+          <a href="{% url 'mywinners' %}" class="btn btn-success mt-3">View Winners</a>
+          <a href="{% url 'my_bids' %}" class="btn btn-success mt-3">My Bids</a>
+          <a href="{% url 'my_wins' %}" class="btn btn-success mt-3">My Wins</a>
+
+          <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-secondary mt-3">Sign Out</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

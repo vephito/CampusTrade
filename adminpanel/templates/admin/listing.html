@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %}
+{% block body %}
+   
+
+        <table class="table">
+            <thead>
+              <tr>
+                <th class="border px-4 py-2" scope="col">Title</th>
+                <th class="border px-4 py-2" scope="col">Owner</th>
+                <th class="border px-4 py-2" scope="col">Current Bid</th>
+                <th class="border px-4 py-2" scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for listing in listings %}
+                <tr>
+                  <td class="border px-4 py-2">{{ listing.title }}</td>
+                  <td class="border px-4 py-2">{{ listing.user }}</td>
+                  {% if listing.bid_listing.all %}
+                    <td class="border px-4 py-2">${{ listing.bid_listing.last.bid_amount }}</td>
+                  {% else %}
+                    <td class="border px-4 py-2">${{ listing.price }}</td>
+                  {% endif %}
+                  <td >
+                    <a href="{% url 'editlisting' listing.id %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'deletelisting' listing.id %}" class="btn btn-danger">Delete</a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          
+
+        
+      {% endblock %}

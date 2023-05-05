@@ -2,7 +2,7 @@ from django.db import IntegrityError
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, logout, authenticate, get_user_model
 from django.contrib.auth.models import User
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
@@ -10,7 +10,6 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import RegistrationForm
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib import messages
-# Create your views here.
 
 
 class CustomloginView(LoginView):
@@ -30,13 +29,27 @@ class RegisterPage(FormView):
     template_name = 'user/register.html'
     form_class = RegistrationForm
     redirect_authenticated_user = True
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('listing')
 
+    # def form_valid(self, form):
+    #     user = form.save()
+    #     if user is not None:
+    #         login(self.request, user)
+    #     return super(RegisterPage, self).form_valid(form)
     def form_valid(self, form):
-        user = form.save()
+        user = get_user_model().objects.create(
+            username=form.cleaned_data['username'],
+            email=form.cleaned_data['email']
+        )
+        user.set_password(form.cleaned_data['password1'])
+        user.save()
+
+        if self.request.POST.get('is_super'):
+            user.is_superuser = True
+            user.save()
         if user is not None:
             login(self.request, user)
-        return super(RegisterPage, self).form_valid(form)
+        return super().form_valid(form)
 
 
 class CustomLogoutView(LogoutView):

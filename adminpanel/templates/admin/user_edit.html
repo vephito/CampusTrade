@@ -1,0 +1,73 @@
+{% extends 'base/base.html' %}
+{% block body %}
+     
+        {% comment %} <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit">Save</button>
+        </form> {% endcomment %}
+        
+        <div class="container">
+            <h1>Edit User</h1>
+            <form method="post">
+              {% csrf_token %}
+              <div class="form-group row">
+                <label for="{{ form.username.id_for_label }}" class="col-sm-2 col-form-label">Username:</label>
+                <div class="col-sm-10">
+                  {{ form.username }}
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="{{ form.email.id_for_label }}" class="col-sm-2 col-form-label">Email:</label>
+                <div class="col-sm-10">
+                  {{ form.email }}
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="{{ form.first_name.id_for_label }}" class="col-sm-2 col-form-label">First Name:</label>
+                <div class="col-sm-10">
+                  {{ form.first_name }}
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="{{ form.last_name.id_for_label }}" class="col-sm-2 col-form-label">Last Name:</label>
+                <div class="col-sm-10">
+                  {{ form.last_name }}
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="{{ form.is_active.id_for_label }}" class="col-sm-2 col-form-label">Active:</label>
+                <div class="col-sm-10">
+                  {{ form.is_active }} Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
+
+
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="{{ form.is_staff.id_for_label }}" class="col-sm-2 col-form-label">Staff:</label>
+                <div class="col-sm-10">
+                  {{ form.is_staff }} Designates whether the user can log into this admin site.
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="{{ form.is_superuser.id_for_label }}" class="col-sm-2 col-form-label">Superuser:</label>
+                <div class="col-sm-10">
+                  {{ form.is_superuser }} Designates that this user has all permissions without explicitly assigning them.
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="{{ form.date_joined.id_for_label }}" class="col-sm-2 col-form-label">Date Joined:</label>
+                <div class="col-sm-10">
+                  {{ form.date_joined }}
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2">
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        
+
+        {% endblock %}

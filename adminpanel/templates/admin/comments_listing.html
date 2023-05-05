@@ -1,0 +1,25 @@
+{% extends 'base/base.html' %}
+{% block body %}
+          <div class="container-fluid">
+            <h1>Listings</h1>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for listing in listings %}
+                  <tr>
+                    <td>{{ listing.title }}</td>
+                    <td>
+                      <a href="{% url 'listingcomments' pk=listing.id %}" class="btn btn-primary">View comments</a>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          
+       {% endblock %}
